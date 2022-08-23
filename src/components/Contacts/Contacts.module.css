@@ -1,0 +1,24 @@
+.contact {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--secondary-bg-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.contactName {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.contactMessage {
+  font-size: 14px;
+}
+
+.messageTime {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 10px;
+}

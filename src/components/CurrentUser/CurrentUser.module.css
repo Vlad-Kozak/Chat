@@ -1,0 +1,51 @@
+.userWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.userName {
+  width: 140px;
+  font-size: 18px;
+}
+
+.burgerBtn {
+  display: flex;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.signOutBtn {
+  display: flex;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.signOutLogo {
+  width: 30px;
+  height: 30px;
+}
+
+.searchWrap {
+  position: relative;
+}
+
+.searchInput {
+  display: block;
+  margin: 0 auto;
+  padding: 5px 30px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.searchInput::placeholder {
+  font-size: 12px;
+}
+
+.searchLogo {
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  transform: translateY(-50%);
+}

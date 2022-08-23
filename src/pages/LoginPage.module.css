@@ -1,0 +1,28 @@
+.page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.google {
+  display: flex;
+  align-items: center;
+
+  padding: 20px 40px;
+  border-radius: var(--border-radius);
+  background-color: var(--secondary-bg-color);
+  cursor: pointer;
+  box-shadow: 3px 3px 10px 3px var(--box-shadow-color);
+
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary-text-color);
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+}

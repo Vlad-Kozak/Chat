@@ -1,0 +1,10 @@
+:root {
+  --primary-text-color: #303030;
+  --secondary-text-color: #414141;
+  --primary-bg-color: #d3d3d3;
+  --secondary-bg-color: #ffffff;
+  --accent-bg-color: #383333;
+  --border-color: #979797;
+  --border-radius: 25px;
+  --box-shadow-color: rgba(77, 77, 77, 0.329);
+}
