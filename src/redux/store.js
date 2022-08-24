@@ -12,24 +12,24 @@ import {
 import storage from "redux-persist/lib/storage";
 // local
 import authReducer from "./authSlice";
-import chatReducer from "./chatSlice";
+import { contactsAPI } from "./contactsAPI";
 
-const chatPersistConfig = {
-  key: "chat",
+const authPersistConfig = {
+  key: "auth",
   storage,
 };
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer,
-    chat: persistReducer(chatPersistConfig, chatReducer),
+    auth: persistReducer(authPersistConfig, authReducer),
+    [contactsAPI.reducerPath]: contactsAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(contactsAPI.middleware),
 });
 
 export const persistor = persistStore(store);

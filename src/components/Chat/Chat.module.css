@@ -1,4 +1,145 @@
 .chat {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
   padding: 10px;
+  padding-bottom: 65px;
   background-color: var(--primary-bg-color);
+}
+
+.contactsWrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 80px 20px;
+  background-color: #185680;
+  transform: translateX(100%);
+  overflow-y: scroll;
+  transition: transform 250ms linear;
+}
+
+.contactsWrapActive {
+  composes: contactsWrap;
+  display: block;
+  transform: translateX(0%);
+}
+
+.currentContact {
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto 20px;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-bg-color);
+
+  color: var(--primary-text-color);
+}
+
+.currentContactName {
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+.messagesBlock {
+  max-width: 440px;
+  height: 65%;
+  margin: 0 auto;
+  border-radius: var(--border-radius);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.messages {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-bg-color);
+
+  color: var(--primary-text-color);
+}
+
+.message {
+  width: fit-content;
+  display: block;
+  word-break: break-all;
+  margin-bottom: 10px;
+}
+
+.userMessage {
+  composes: message;
+  margin-left: auto;
+}
+
+.contactMessage {
+  composes: message;
+}
+
+.messageValue {
+  padding: 15px;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-bg-color);
+
+  font-size: 14px;
+}
+
+.messageTime {
+  display: block;
+  width: fit-content;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+.userMessage .messageTime {
+  margin-left: auto;
+}
+
+.sendForm {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  align-items: center;
+  width: 80%;
+  max-width: 440px;
+}
+
+.sendInput {
+  width: 420px;
+  max-width: 420px;
+  display: block;
+  padding: 5px 10px;
+  border-color: transparent;
+  border-radius: var(--border-radius);
+}
+
+.sendInput::placeholder {
+  font-size: 14px;
+}
+
+.sendBtn {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.sendLogo {
+  width: 40px;
+  height: 40px;
+}
+
+.emptyChat {
+  width: 280px;
+  margin: 20vh auto;
+  padding: 30px;
+  border-radius: var(--border-radius);
+  background-color: var(--primary-bg-color);
+
+  text-align: center;
+  color: var(--primary-text-color);
 }

@@ -1,34 +1,39 @@
 import React from "react";
 // local
 import UserPhoto from "components/UserPhoto/UserPhoto";
-import { ReactComponent as BurgerLogo } from "../../images/burger.svg";
+import { ReactComponent as ChatLogo } from "../../images/chat.svg";
 import { ReactComponent as SignoutLogo } from "../../images/signout.svg";
-import { ReactComponent as SearchLogo } from "../../images/search.svg";
 import s from "./CurrentUser.module.css";
+import { useDispatch } from "react-redux";
+import { removeUser } from "redux/authSlice";
 
-export default function CurrentUser({ currentUser, setSearchValue }) {
+export default function CurrentUser({
+  currentUser,
+  contactsIsHidden,
+  setContactsIsHidden,
+}) {
+  const dispatch = useDispatch();
+
+  const handleChatBtnClick = () => {
+    setContactsIsHidden(!contactsIsHidden);
+  };
+
+  const handleSignOutBtnClick = () => {
+    dispatch(removeUser());
+  };
+
   return (
     <div className={s.currentUser}>
-      <div className={s.userWrap}>
+      <div className={s.userPhotoWrap}>
         <UserPhoto photoURL={currentUser.photoURL} />
-        <h2 className={s.userName}>{currentUser.displayName}</h2>
-        <button className={s.signOutBtn}>
-          <SignoutLogo className={s.signOutLogo} />
-        </button>
-        <button className={s.burgerBtn}>
-          <BurgerLogo className={s.signOutLogo} />
-        </button>
       </div>
-      <div className={s.searchWrap}>
-        <SearchLogo className={s.searchLogo} />
-        <input
-          className={s.searchInput}
-          name="searchValue"
-          onChange={(e) => setSearchValue(e.currentTarget.value)}
-          type="text"
-          placeholder="Search or start new chat"
-        />
-      </div>
+      <h2 className={s.userName}>{currentUser.displayName}</h2>
+      <button onClick={handleSignOutBtnClick} className={s.signOutBtn}>
+        <SignoutLogo className={s.signOutLogo} />
+      </button>
+      <button onClick={handleChatBtnClick} className={s.chatBtn}>
+        <ChatLogo className={s.chatLogo} />
+      </button>
     </div>
   );
 }

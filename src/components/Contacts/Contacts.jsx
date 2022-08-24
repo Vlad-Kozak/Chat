@@ -1,39 +1,36 @@
-import UserPhoto from "components/UserPhoto/UserPhoto";
 import React from "react";
-import { formatDate } from "utils/formatDate";
 // local
 import s from "./Contacts.module.css";
+import UserPhoto from "components/UserPhoto/UserPhoto";
+import { formatDate } from "utils/formatDate";
+import { sortContacts } from "utils/sortContacts";
 
 export default function Contacts({ contacts, handleContactClick }) {
-  const sortContacts = [...contacts].sort((a, b) => {
-    const indexA = a.messages.length - 1;
-    const indexB = b.messages.length - 1;
-    return b.messages[indexB].createdAt - a.messages[indexA].createdAt;
-  });
-  console.log(sortContacts);
+  const readyContacts = sortContacts(contacts);
+
   return (
     <ul className={s.contacts}>
-      {sortContacts.map(({ uid, displayName, photoURL, messages }) => {
-        if (!displayName) {
+      {readyContacts.map(({ id, userName, photoURL, messages }) => {
+        if (!userName) {
           return null;
         }
 
         const index = messages.length - 1;
         return (
           <li
-            onClick={() => handleContactClick(uid, displayName, photoURL)}
-            key={uid}
+            onClick={() => handleContactClick(id, userName, photoURL, messages)}
+            key={id}
             className={s.contact}
           >
             <UserPhoto photoURL={photoURL} />
             <div className={s.contactWrap}>
-              <h2 className={s.contactName}>{displayName}</h2>
+              <h2 className={s.contactName}>{userName}</h2>
               <p className={s.contactMessage}>
-                {index && messages[index].value}
+                {messages[index] && messages[index].value}
               </p>
             </div>
             <p className={s.messageTime}>
-              {index && formatDate(messages[index].createdAt)}
+              {messages[index] && formatDate(messages[index].createdAt)}
             </p>
           </li>
         );

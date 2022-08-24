@@ -1,51 +1,44 @@
-.userWrap {
+.currentUser {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 20px;
+}
+
+.userPhotoWrap {
+  z-index: 999;
 }
 
 .userName {
   width: 140px;
+  margin-left: 10px;
+
   font-size: 18px;
+  color: var(--primary-text-color);
+  z-index: 999;
 }
 
-.burgerBtn {
+.chatBtn {
   display: flex;
+  margin-left: 10px;
   background-color: transparent;
   cursor: pointer;
+  z-index: 999;
+}
+
+.chatLogo {
+  width: 40px;
+  height: 40px;
 }
 
 .signOutBtn {
   display: flex;
+  margin-left: auto;
   background-color: transparent;
   cursor: pointer;
+  z-index: 999;
 }
 
 .signOutLogo {
   width: 30px;
   height: 30px;
-}
-
-.searchWrap {
-  position: relative;
-}
-
-.searchInput {
-  display: block;
-  margin: 0 auto;
-  padding: 5px 30px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-}
-
-.searchInput::placeholder {
-  font-size: 12px;
-}
-
-.searchLogo {
-  position: absolute;
-  top: 50%;
-  left: 25px;
-  transform: translateY(-50%);
 }
