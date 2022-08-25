@@ -140,7 +140,7 @@
   .chat {
     flex-direction: column;
     width: 100vw;
-    height: 100vh;
+    height: 85vh;
     padding: 10px;
   }
 

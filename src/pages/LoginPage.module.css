@@ -26,3 +26,27 @@
   height: 30px;
   margin-right: 20px;
 }
+
+.spinner {
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 4px solid;
+  border-color: #dbdcef;
+  border-right-color: var(--primary-bg-color);
+  animation: spinner-anim 1s infinite linear;
+}
+
+@media screen and (max-width: 767px) {
+  .page {
+    width: 100vw;
+    height: 85vh;
+  }
+}
+
+@keyframes spinner-anim {
+  to {
+    transform: rotate(1turn);
+  }
+}
