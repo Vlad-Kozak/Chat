@@ -17,14 +17,16 @@ export default function LoginPage() {
   const [firstLoad, setFirstLoad] = useState(true);
 
   useEffect(() => {
-    getRedirectResult(auth).then((r) => {
-      setFirstLoad(false);
-      if (!r?.user) {
-        return;
-      }
-      const { displayName, email, uid, photoURL } = r.user;
-      dispatch(setUser({ displayName, email, uid, photoURL }));
-    });
+    getRedirectResult(auth)
+      .then((r) => {
+        setFirstLoad(false);
+        if (!r?.user) {
+          return;
+        }
+        const { displayName, email, uid, photoURL } = r.user;
+        dispatch(setUser({ displayName, email, uid, photoURL }));
+      })
+      .catch(console.log);
   }, [auth, dispatch]);
 
   const handleLogin = () => {

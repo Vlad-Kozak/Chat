@@ -8,11 +8,14 @@ import HomePage from "pages/HomePage";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<PrivateRoute>{<HomePage />}</PrivateRoute>} />
+      <Route
+        path="/"
+        element={<PublicRoute restricted>{<LoginPage />}</PublicRoute>}
+      />
 
       <Route
-        path="/login"
-        element={<PublicRoute restricted>{<LoginPage />}</PublicRoute>}
+        path="/chat"
+        element={<PrivateRoute>{<HomePage />}</PrivateRoute>}
       />
     </Routes>
   );
