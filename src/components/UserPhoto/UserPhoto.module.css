@@ -1,5 +1,15 @@
 .image {
+  border-radius: 50%;
+}
+
+.smallImage {
+  width: 35px;
+  height: 35px;
+  composes: image;
+}
+
+.middleImage {
+  composes: image;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
 }

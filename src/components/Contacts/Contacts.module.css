@@ -1,24 +1,37 @@
 .contact {
   position: relative;
+
+  max-width: 440px;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: var(--border-radius);
   background-color: var(--secondary-bg-color);
-  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+
+  color: var(--primary-text-color);
+}
+
+.contact:not(:last-child) {
+  margin-bottom: 10px;
 }
 
 .contactName {
-  font-size: 16px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .contactMessage {
+  margin-left: 15px;
   font-size: 14px;
 }
 
 .messageTime {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 7px;
+  right: 16px;
   font-size: 10px;
 }

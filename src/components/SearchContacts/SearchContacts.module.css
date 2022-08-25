@@ -1,0 +1,26 @@
+.searchWrap {
+  position: relative;
+  width: 280px;
+  margin: 0 auto;
+}
+
+.searchInput {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  padding: 5px 45px;
+  border-color: transparent;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+.searchInput::placeholder {
+  font-size: 14px;
+}
+
+.searchLogo {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
