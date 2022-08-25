@@ -25,7 +25,7 @@ export default function CurrentUser({
   return (
     <div className={s.currentUser}>
       <div className={s.userPhotoWrap}>
-        <UserPhoto photoURL={currentUser.photoURL} />
+        <UserPhoto photoURL={currentUser.photoURL} size="middle" />
       </div>
       <h2 className={s.userName}>{currentUser.displayName}</h2>
       <button onClick={handleSignOutBtnClick} className={s.signOutBtn}>

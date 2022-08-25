@@ -22,11 +22,16 @@ export default function Contacts({ contacts, handleContactClick }) {
             key={id}
             className={s.contact}
           >
-            <UserPhoto photoURL={photoURL} />
+            <UserPhoto photoURL={photoURL} size="middle" />
             <div className={s.contactWrap}>
               <h2 className={s.contactName}>{userName}</h2>
               <p className={s.contactMessage}>
-                {messages[index] && messages[index].value}
+                {messages[index] &&
+                  messages[index].value.length <= 21 &&
+                  messages[index].value}
+                {messages[index] &&
+                  messages[index].value.length > 21 &&
+                  messages[index].value.slice(0, 21) + "..."}
               </p>
             </div>
             <p className={s.messageTime}>

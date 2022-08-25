@@ -9,12 +9,17 @@ import SearchContacts from "components/SearchContacts/SearchContacts";
 import { ReactComponent as SendLogo } from "../../images/send.svg";
 import { formatDateLocal } from "utils/formatDate";
 import { useEditContactMutation, useGetContactsQuery } from "redux/contactsAPI";
+import { getMessage } from "service/chucknorrisAPI";
+import { getRandomValue } from "utils/randomValue";
 
 export default function Chat() {
   const [currentContact, setCurrentContact] = useState(null);
   const [message, setMessage] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const [contactsIsHidden, setContactsIsHidden] = useState(true);
+  const [isMessageWasSending, setIsMessageWasSending] = useState(false);
+  const [isSendingBlocked, setIsSendingBlocked] = useState(false);
+  const [timerId, setTimerId] = useState(false);
 
   const { data = [] } = useGetContactsQuery();
   const [editContact] = useEditContactMutation();
@@ -50,7 +55,43 @@ export default function Chat() {
       contact: newCurrentContact,
     });
     setMessage("");
+    clearTimeout(timerId);
+    setTimerId(
+      setTimeout(
+        () => setIsMessageWasSending(true),
+        getRandomValue(10000, 15000)
+      )
+    );
+    setIsSendingBlocked(true);
+    setTimeout(() => setIsSendingBlocked(false), 500);
   };
+
+  const sendAnswer = async () => {
+    const answer = await getMessage();
+    const newCurrentContact = {
+      id: currentContact.id,
+      userName: currentContact.userName,
+      photoURL: currentContact.photoURL,
+      messages: [
+        ...currentContact.messages,
+        {
+          sender: "contact",
+          value: answer,
+          createdAt: Date.now(),
+        },
+      ],
+    };
+    await editContact({
+      id: currentContact.id,
+      contact: newCurrentContact,
+    });
+    setCurrentContact(newCurrentContact);
+  };
+
+  if (isMessageWasSending) {
+    sendAnswer();
+    setIsMessageWasSending(false);
+  }
 
   return (
     <div className={s.chat}>
@@ -72,59 +113,70 @@ export default function Chat() {
           />
         </div>
       </div>
-      {currentContact && (
-        <div className={s.currentContact}>
-          <UserPhoto photoURL={currentContact.photoURL} />
-          <h2 className={s.currentContactName}>{currentContact.userName}</h2>
-        </div>
-      )}
-      {currentContact && (
-        <div className={s.messagesBlock}>
-          <ul className={s.messages}>
-            {currentContact.messages.map(({ sender, value, createdAt }) => {
-              return (
-                <li
-                  className={
-                    sender === "user" ? s.userMessage : s.contactMessage
-                  }
-                  key={createdAt}
-                >
-                  <p className={s.messageValue}>{value}</p>
-                  <p className={s.messageTime}>{formatDateLocal(createdAt)}</p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
-      {currentContact && (
-        <form
-          className={s.sendForm}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSendMessage();
-          }}
-        >
-          <input
-            className={s.sendInput}
-            type="text"
-            name="message"
-            value={message}
-            onChange={(e) => setMessage(e.currentTarget.value)}
-            placeholder="Type your message"
-          />
-          <button
-            onClick={handleSendMessage}
-            className={s.sendBtn}
-            type="button"
+      <div className={s.messagesBlock}>
+        {currentContact && (
+          <div className={s.currentContact}>
+            <UserPhoto photoURL={currentContact.photoURL} size="small" />
+            <h2 className={s.currentContactName}>{currentContact.userName}</h2>
+          </div>
+        )}
+        {currentContact && (
+          <div className={s.messagesWrap}>
+            <ul className={s.messages}>
+              {currentContact.messages.map(({ sender, value, createdAt }) => {
+                return (
+                  <li
+                    className={
+                      sender === "user" ? s.userMessage : s.contactMessage
+                    }
+                    key={createdAt}
+                  >
+                    <p className={s.messageValue}>{value}</p>
+                    <p className={s.messageTime}>
+                      {formatDateLocal(createdAt)}
+                    </p>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+        {currentContact && (
+          <form
+            className={s.sendForm}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSendMessage();
+            }}
           >
-            <SendLogo className={s.sendLogo} />
-          </button>
-        </form>
-      )}
-      {!currentContact && (
-        <div className={s.emptyChat}>Choose who you would like to write to</div>
-      )}
+            <input
+              autoComplete="off"
+              className={s.sendInput}
+              type="text"
+              name="message"
+              value={message}
+              onChange={(e) => setMessage(e.currentTarget.value)}
+              placeholder="Type your message"
+            />
+            <button
+              disabled={isSendingBlocked ? true : false}
+              className={s.sendBtn}
+              type="submit"
+            >
+              {isSendingBlocked ? (
+                <div className={s.spinner}></div>
+              ) : (
+                <SendLogo className={s.sendLogo} />
+              )}
+            </button>
+          </form>
+        )}
+        {!currentContact && (
+          <div className={s.emptyChat}>
+            Choose who you would like to write to
+          </div>
+        )}
+      </div>
     </div>
   );
 }

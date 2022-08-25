@@ -1,7 +1,7 @@
 .currentUser {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .userPhotoWrap {
@@ -41,4 +41,10 @@
 .signOutLogo {
   width: 30px;
   height: 30px;
+}
+
+@media screen and (min-width: 768px) {
+  .chatBtn {
+    display: none;
+  }
 }
