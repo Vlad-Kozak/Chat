@@ -1,4 +1,5 @@
 import React from "react";
+// local
 import s from "./UserPhoto.module.css";
 
 export default function UserPhoto({ photoURL, size }) {

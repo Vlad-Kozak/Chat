@@ -11,6 +11,7 @@ import { formatDateLocal } from "utils/formatDate";
 import { useEditContactMutation, useGetContactsQuery } from "redux/contactsAPI";
 import { getMessage } from "service/chucknorrisAPI";
 import { getRandomValue } from "utils/randomValue";
+import { createContact } from "utils/createContact";
 
 export default function Chat() {
   const [currentContact, setCurrentContact] = useState(null);
@@ -34,21 +35,7 @@ export default function Chat() {
     if (message.length === 0) {
       return;
     }
-
-    const newCurrentContact = {
-      id: currentContact.id,
-      userName: currentContact.userName,
-      photoURL: currentContact.photoURL,
-      messages: [
-        ...currentContact.messages,
-        {
-          sender: "user",
-          value: message,
-          createdAt: Date.now(),
-        },
-      ],
-    };
-
+    const newCurrentContact = createContact(currentContact, "user", message);
     setCurrentContact(newCurrentContact);
     await editContact({
       id: currentContact.id,
@@ -68,19 +55,7 @@ export default function Chat() {
 
   const sendAnswer = async () => {
     const answer = await getMessage();
-    const newCurrentContact = {
-      id: currentContact.id,
-      userName: currentContact.userName,
-      photoURL: currentContact.photoURL,
-      messages: [
-        ...currentContact.messages,
-        {
-          sender: "contact",
-          value: answer,
-          createdAt: Date.now(),
-        },
-      ],
-    };
+    const newCurrentContact = createContact(currentContact, "contact", answer);
     await editContact({
       id: currentContact.id,
       contact: newCurrentContact,

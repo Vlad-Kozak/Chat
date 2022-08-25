@@ -7,9 +7,9 @@ import {
   signInWithRedirect,
 } from "firebase/auth";
 // local
+import s from "./LoginPage.module.css";
 import { setUser } from "redux/authSlice";
 import { ReactComponent as Google } from "../images/google.svg";
-import s from "./LoginPage.module.css";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
