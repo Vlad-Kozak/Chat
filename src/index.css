@@ -18,3 +18,16 @@ body {
   -o-animation: 10s linear 0s normal none infinite animate;
   animation: 10s linear 0s normal none infinite animate;
 }
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary-bg-color);
+  border-radius: var(--border-radius);
+}
