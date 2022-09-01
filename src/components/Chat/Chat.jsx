@@ -32,7 +32,7 @@ export default function Chat() {
   };
 
   const handleSendMessage = async () => {
-    if (message.length === 0) {
+    if (message.trim().length === 0) {
       return;
     }
     const newCurrentContact = createContact(currentContact, "user", message);
